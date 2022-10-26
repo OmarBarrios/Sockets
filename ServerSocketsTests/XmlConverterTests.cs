@@ -30,7 +30,7 @@ namespace ServerSockets.Tests
         {
             TextReader tr = new StreamReader(basePath + "/" + "ResponseFile.xml");
             string myText = tr.ReadLine();
-
+            Console.WriteLine(basePath);
             Assert.AreEqual("<ConvertResponse>", myText);
         }
 
@@ -46,12 +46,7 @@ namespace ServerSockets.Tests
         {
             TextReader tr = new StreamReader(basePath + "/" + "RequestFile.xml");
             string myText = tr.ReadToEnd();
-            decimal resultado;
-            string operacion = "";
-            operacion = XmlConverter.ProcesarXmlConvertRequest(myText, out resultado);
-
-            Console.WriteLine("O: " + operacion);
-            Console.WriteLine("R: " + resultado);
+            string operacion = XmlConverter.ProcesarXmlConvertRequest(myText, out decimal resultado);
 
             Assert.AreEqual(10, resultado);
             Assert.AreEqual("USD-EUR", operacion);

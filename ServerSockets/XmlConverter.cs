@@ -16,20 +16,16 @@ namespace ServerSockets
             doc.LoadXml(xmlData);
 
             XmlNode root = doc.DocumentElement;
-
             XmlNamespaceManager nsmgr = new XmlNamespaceManager(doc.NameTable);
-            nsmgr.AddNamespace("tst", "urn:data-schema");
+            nsmgr.AddNamespace("tst", "http://sockets");
 
 
-            var fromUnits = root.SelectSingleNode("descendant::tst:from", nsmgr);
-            var toUnits = root.SelectSingleNode("descendant::tst:to", nsmgr);
-            var nodeUnits = root.SelectSingleNode("descendant::tst:units", nsmgr);
+            var fromUnits = root.SelectSingleNode("//tst:from", nsmgr);
+            var toUnits = root.SelectSingleNode("//tst:to", nsmgr);
+            var nodeUnits = root.SelectSingleNode("//tst:units", nsmgr);
             
-            Console.WriteLine("node:  " + nodeUnits.InnerText);
-
             resultado = Convert.ToDecimal(nodeUnits.InnerText);
             
-
             return String.Concat(fromUnits.InnerText.ToUpper().Trim(), "-", toUnits.InnerText.ToUpper().Trim());
         }
 
