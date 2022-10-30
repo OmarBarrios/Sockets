@@ -13,6 +13,10 @@ namespace ServerSockets
         public static string ProcesarXmlConvertRequest(string xmlData, out decimal resultado)
         {
             XmlDocument doc = new XmlDocument();
+
+            Console.Write(xmlData);
+
+
             doc.LoadXml(xmlData);
 
             XmlNode root = doc.DocumentElement;

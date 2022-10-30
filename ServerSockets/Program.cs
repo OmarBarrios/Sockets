@@ -12,6 +12,14 @@ namespace ServerSockets
     {
         static void Main(string[] args)
         {
+
+            CurrencyServer server = new CurrencyServer();
+
+            server.Arrancar();
+
+        }
+        void firstServer()
+        {
             IPAddress iPAddress = IPAddress.Parse("127.0.0.1");
             TcpListener tcpListener = new TcpListener(iPAddress, 13000);
             tcpListener.Start();
@@ -36,7 +44,6 @@ namespace ServerSockets
 
                 }
             }
-
         }
     }
 }

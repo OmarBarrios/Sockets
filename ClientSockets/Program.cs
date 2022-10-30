@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
@@ -12,14 +13,17 @@ namespace ClientSockets
     {
         static void Main(string[] args)
         {
-            string host = ConfigurationManager.AppSettings["host"];
-            string port = ConfigurationManager.AppSettings["port"];
+            string basePath = AppDomain.CurrentDomain.BaseDirectory;
+            string host = Properties.Settings.Default.host;
+            string port = Properties.Settings.Default.port;
 
             TcpClient tcpClient = new TcpClient(host, (int)long.Parse(port));
-
             NetworkStream networkStream = tcpClient.GetStream();
 
-            byte[] byteMensaje = Encoding.ASCII.GetBytes("Mensaje entre sockets :)");
+            TextReader tr = new StreamReader(basePath + "/" + "RequestFile.xml");
+            string myText = tr.ReadToEnd();
+
+            byte[] byteMensaje = Encoding.ASCII.GetBytes(myText);
 
             networkStream.Write(byteMensaje, 0, byteMensaje.Length);
             Console.ReadLine();
